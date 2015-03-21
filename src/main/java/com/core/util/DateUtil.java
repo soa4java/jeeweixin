@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 
  * 日期工具类
- * @author 微信 qicong88
+ * 
  */
 
 public class DateUtil {

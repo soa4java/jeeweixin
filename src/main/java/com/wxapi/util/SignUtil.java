@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * 微信验证
- * @author 微信 qicong88
+ * 
  */
 
 public class SignUtil {

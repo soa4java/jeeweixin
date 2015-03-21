@@ -19,7 +19,7 @@ import com.core.domain.OrmVO;
 /**
  * 
  * 针对 SpringMVC、MyBatis
- * @author 微信 qicong88
+ * 
  *
  */
 

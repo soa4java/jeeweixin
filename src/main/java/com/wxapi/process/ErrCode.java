@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author 微信 qicong88
+ * 微信公众平台全局返回码说明
  */
 public class ErrCode {
 	
 	private static Map<String,String> codeMap = new HashMap<String,String>();
-
+	
 	static {
 		codeMap.put("-1","系统繁忙");
 		codeMap.put("0","请求成功");
@@ -93,13 +93,23 @@ public class ErrCode {
 		codeMap.put("47001","解析JSON/XML内容错误");
 		codeMap.put("48001","api功能未授权");
 		codeMap.put("50001","用户未授权该api");
+		codeMap.put("61451","参数错误(invalid parameter)");
+		codeMap.put("61452","无效客服账号(invalid kf_account)");
+		codeMap.put("61453","客服帐号已存在(kf_account exsited)");
+		codeMap.put("61454","客服帐号名长度超过限制(仅允许10个英文字符，不包括@及@后的公众号的微信号)(invalid kf_acount length)");
+		codeMap.put("61455","客服帐号名包含非法字符(仅允许英文+数字)(illegal character in kf_account)");
+		codeMap.put("61456","客服帐号个数超过限制(10个客服账号)(kf_account count exceeded)");
+		codeMap.put("61457","无效头像文件类型(invalid file type)");
+		codeMap.put("61450","系统错误(system error)");
+		codeMap.put("61500","日期格式错误");
+		codeMap.put("61501","日期范围错误");
 	}
 	
 	public static String errMsg(Integer errCode){
-		if(errCode != null){
+		if(errCode != null && codeMap.containsKey(errCode+"")){
 			return codeMap.get(errCode+"");
 		}
-		return "";
+		return null;
 	}
 	
 }

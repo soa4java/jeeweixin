@@ -27,7 +27,7 @@ import com.wxcms.mapper.AccountDao;
 import com.wxcms.mapper.MsgNewsDao;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller
@@ -72,6 +72,7 @@ public class WxCmsCtrl {
 			tmpAccount.setAccount(account.getAccount());
 			tmpAccount.setAppid(account.getAppid());
 			tmpAccount.setAppsecret(account.getAppsecret());
+			tmpAccount.setMsgcount(account.getMsgcount());
 			accountDao.update(tmpAccount);
 			WxAccountContext.updateAccount(tmpAccount);
 		}

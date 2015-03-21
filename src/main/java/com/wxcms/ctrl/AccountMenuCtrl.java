@@ -14,7 +14,7 @@ import com.wxcms.service.AccountMenuGroupService;
 import com.wxcms.service.AccountMenuService;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller

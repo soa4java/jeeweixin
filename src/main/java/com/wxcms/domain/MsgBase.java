@@ -4,7 +4,7 @@ import com.core.domain.BaseEntity;
 
 /**
  * 消息基本信息
- * @author 微信 qicong88
+ * 
  *
  */
 public class MsgBase extends BaseEntity{

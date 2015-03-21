@@ -3,7 +3,7 @@ package com.wxapi.vo;
 
 /**
  * 用户发送给公众号的消息；
- * @author 微信 qicong88
+ * 
  */
 
 public class MsgRequest{

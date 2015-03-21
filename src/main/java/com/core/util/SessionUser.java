@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 保存在session中的User
- * @author 微信 qicong88
+ * 
  */
 public class SessionUser implements Serializable{
 	private static final long serialVersionUID = -8293251468274977994L;

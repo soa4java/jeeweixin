@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * 公众号回复给用户的消息-基本信息
- * @author 微信 qicong88
+ * 
  */
 
 public class MsgResponse implements Serializable{

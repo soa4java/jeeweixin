@@ -25,12 +25,12 @@ public class IndexCtrl {
 	
 	@RequestMapping("/init")
 	public void init(HttpServletRequest request, HttpServletResponse response){
-	 	String workSpace = "G:/0brain/workspace/artplayers";//改成自己的项目路径
-	 	String htmlDir = "G:/0brain/workspace/artplayers/WebContent/WEB-INF/pages";
+	 	String workSpace = "";//改成自己的项目路径
+	 	String htmlDir = "";
         try {
             // 创建beans
             OrmVO vo = new OrmVO();
-            vo.setPrefix("t_artplayers");// 如果是：T_BASE_ 则对所有以 T_BASE_ 开头的表生成java代码
+            vo.setPrefix("");// 如果是：T_BASE_ 则对所有以 T_BASE_ 开头的表生成java代码
             List<String> tables = ormDao.listTables(vo);
             Map<String, String> tableMap = new HashMap<String, String>();// 这里写一个表名 和 业务名对应的map
             for (String table : tables) {

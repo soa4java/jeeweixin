@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
- * @author 微信 qicong88
+ * 
  * Bean 转换工具
  */
 

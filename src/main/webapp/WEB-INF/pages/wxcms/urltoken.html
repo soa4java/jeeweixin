@@ -75,6 +75,20 @@
 								<label>AppSecret </label>
 								<input name="appsecret" style="width:500px;" type="text" value="${account.appsecret!}"/>
 							</li>
+							<li>
+								<label>消息条数 </label>
+								<select name="msgcount">
+									<option value="1" <#if account.msgcount?? && account.msgcount == 1>selected = "selected"</#if> >1条</option>
+									<option value="2" <#if account.msgcount?? && account.msgcount == 2>selected = "selected"</#if> >2条</option>
+									<option value="3" <#if account.msgcount?? && account.msgcount == 3>selected = "selected"</#if> >3条</option>
+									<option value="4" <#if account.msgcount?? && account.msgcount == 4>selected = "selected"</#if> >4条</option>
+									<option value="5" <#if account.msgcount?? && account.msgcount == 5>selected = "selected"</#if> >5条</option>
+									<option value="6" <#if account.msgcount?? && account.msgcount == 6>selected = "selected"</#if> >6条</option>
+									<option value="7" <#if account.msgcount?? && account.msgcount == 7>selected = "selected"</#if> >7条</option>
+									<option value="8" <#if account.msgcount?? && account.msgcount == 8>selected = "selected"</#if> >8条</option>
+								</select>
+								<span class="gray-span"> 回复图文消息条数</span>
+							</li>
 						</ul>
 						
 						<div style="margin-left:75px;margin-top: 20px;">

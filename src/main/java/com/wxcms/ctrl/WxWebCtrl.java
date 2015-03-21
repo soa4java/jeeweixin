@@ -17,7 +17,7 @@ import com.wxcms.service.MsgNewsService;
 
 /**
  * 微信消息查看
- * @author 微信 qicong88
+ * 
  */
 @Controller
 @RequestMapping("/wxweb")

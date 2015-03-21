@@ -4,7 +4,7 @@ import com.core.domain.BaseEntity;
 
 /**
  * 账号菜单
- * @author 微信 qicong88
+ * 
  */
 
 public class AccountMenu extends BaseEntity{

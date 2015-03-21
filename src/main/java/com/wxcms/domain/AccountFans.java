@@ -4,7 +4,7 @@ import com.core.domain.BaseEntity;
 
 /**
  * 账号粉丝用户信息
- * @author 微信 qicong88
+ * 
  */
 public class AccountFans extends BaseEntity{
 

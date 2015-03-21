@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 公众号回复给用户的消息 - 图文消息
- * @author 微信 qicong88
+ * 
  */
 
 public class MsgResponseNews extends MsgResponse{

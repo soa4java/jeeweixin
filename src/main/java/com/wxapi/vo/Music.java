@@ -3,7 +3,7 @@ package com.wxapi.vo;
 /**
  * 
  * 音乐消息
- * @author 微信 qicong88
+ * 
  * 
  */
 public class Music {

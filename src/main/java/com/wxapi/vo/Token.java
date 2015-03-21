@@ -4,7 +4,7 @@ import com.wxapi.process.ErrCode;
 
 /**
  * 接口凭证 
- * @author 微信 qicong88
+ * 
  *
  */
 public class Token {

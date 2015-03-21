@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.wxcms.domain.Account;
 /**
- * @author 微信 qicong88
+ * 全局容器，类似于缓存，保存公众号，不需要每次从数据库中读取公众账号
  */
 
 public class WxAccountContext {

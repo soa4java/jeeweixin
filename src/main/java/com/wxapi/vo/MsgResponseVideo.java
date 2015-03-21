@@ -3,7 +3,7 @@ package com.wxapi.vo;
 /**
  * 
  * 公众号回复给用户的消息 - 视频消息
- * @author 微信 qicong88
+ * 
  * 
  */
 

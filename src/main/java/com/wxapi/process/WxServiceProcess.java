@@ -19,7 +19,7 @@ import com.wxcms.domain.MsgText;
 
 /**
  * 微信 服务处理，消息转换等
- * @author 微信 qicong88
+ * 
  */
 
 public class WxServiceProcess {

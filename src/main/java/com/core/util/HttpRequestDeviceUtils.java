@@ -3,7 +3,7 @@ package com.core.util;
 import javax.servlet.http.HttpServletRequest;
 /**
  * 客户端判断工具
- * @author 微信 qicong88
+ * 
  */
 public class HttpRequestDeviceUtils {
 

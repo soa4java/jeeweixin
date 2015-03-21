@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 /**
  * 附件上传
- * @author 微信 qicong88
+ * 
  */
 public class UploadUtil {
 	

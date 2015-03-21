@@ -27,7 +27,7 @@ import com.wxapi.vo.Token;
 
 /**
  * 微信 API、微信基本接口
- * @author 微信 qicong88
+ * 
  */
 
 public class WxApi {
@@ -48,7 +48,7 @@ public class WxApi {
 	private static final String GET_FANS_INFO = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
 	
 	//获取账号粉丝列表
-	private static final String GET_FANS_LIST = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
+	private static final String GET_FANS_LIST = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s";
 	
 	//网页授权OAuth2.0获取code
 	private static final String GET_OAUTH_CODE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=%s&scope=%s&state=%s#wechat_redirect";
@@ -93,7 +93,11 @@ public class WxApi {
 	
 	//获取粉丝列表接口
 	public static String getFansListUrl(String token,String nextOpenId){
-		return String.format(GET_FANS_LIST, token, nextOpenId);
+		if(nextOpenId == null){
+			return String.format(GET_FANS_LIST, token);
+		}else{
+			return String.format(GET_FANS_LIST + "&next_openid=%s", token, nextOpenId);
+		}
 	}
 	
 	//网页授权OAuth2.0获取code

@@ -10,7 +10,7 @@ import com.wxcms.domain.AccountFans;
 import com.wxcms.service.AccountFansService;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.core.util.CookieUtil;
-import com.core.util.HttpUtil;
 import com.wxapi.process.ErrCode;
 import com.wxapi.process.MsgXmlUtil;
 import com.wxapi.process.OAuthScope;
@@ -31,7 +29,7 @@ import com.wxcms.domain.AccountFans;
  * 微信与开发者服务器交互接口
  * 如果是GET 请求，那么是进行 URL 、Tocken 认证；
  * 如果是POST 请求，那么是消息交互
- * @author 微信 qicong88
+ * 
  */
 
 @Controller
@@ -46,7 +44,6 @@ public class WxApiCtrl {
 	 * 1. 将token、timestamp、nonce三个参数进行字典序排序
 	 * 2. 将三个参数字符串拼接成一个字符串进行sha1加密
 	 * 3. 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
-	 * 这里可以添加多个账户，不同的account/tocken，提供给微信平台，只要验证通过即可
 	 */
 	@RequestMapping(value = "/{account}/message",  method = RequestMethod.GET)
 	public @ResponseBody String doGet(HttpServletRequest request,@PathVariable String account) {
@@ -71,19 +68,11 @@ public class WxApiCtrl {
 	 * */
 	@RequestMapping(value = "/{account}/message", method = RequestMethod.POST)
 	public @ResponseBody String doPost(HttpServletRequest request,@PathVariable String account,HttpServletResponse response) {
-		
 		//处理用户和微信公众账号交互消息
-		Account actTmp = myService.getByAccount(account);//获取account
-		String appId = null;
-		String appSecret = null;
-		//订阅号（非认证）没有 appId 和  appSecret 
-		if(actTmp != null){
-			appId = actTmp.getAppid();
-			appSecret = actTmp.getAppsecret();
-		}
+		Account accountObj = myService.getByAccount(account);//获取account
 		try {
 			MsgRequest msgRequest = MsgXmlUtil.parseXml(request);//获取发送的消息
-			return myService.processMsg(msgRequest,appId,appSecret);
+			return myService.processMsg(msgRequest,accountObj);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -111,7 +100,7 @@ public class WxApiCtrl {
 		mv.addObject("failureMsg", failureMsg);
 		return mv;
 	}
-
+	
 	//删除微信公众账号菜单
 	@RequestMapping(value = "/deleteMenu")
 	public ModelAndView deleteMenu(HttpServletRequest request) {
@@ -141,7 +130,7 @@ public class WxApiCtrl {
 		if(actTmp != null){
 			boolean flag = myService.syncAccountFansList(actTmp.getAppid(),actTmp.getAppsecret());
 			if(flag){
-				return new ModelAndView("redirect:wxcms/paginationEntity.html");
+				return new ModelAndView("redirect:/accountfans/paginationEntity.html");
 			}
 		}
 		ModelAndView mv = new ModelAndView("common/failure");

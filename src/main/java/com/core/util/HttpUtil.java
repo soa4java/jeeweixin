@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 
  * http工具类
- * @author 微信 qicong88
+ * 
  */
 public class HttpUtil {
 	

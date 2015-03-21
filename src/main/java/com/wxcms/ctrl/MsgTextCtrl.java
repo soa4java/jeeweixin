@@ -14,7 +14,7 @@ import com.wxcms.service.MsgBaseService;
 import com.wxcms.service.MsgTextService;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller

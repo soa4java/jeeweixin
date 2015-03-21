@@ -12,7 +12,7 @@ import com.wxcms.domain.Account;
 import com.wxcms.service.AccountService;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller

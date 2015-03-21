@@ -4,7 +4,7 @@ package com.wxcms.domain;
 
 /**
  * 图文消息
- * @author 微信 qicong88
+ * 
  *
  */
 public class MsgNews extends MsgBase{

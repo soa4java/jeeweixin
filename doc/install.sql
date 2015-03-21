@@ -45,6 +45,11 @@ CREATE TABLE `t_wxcms_account` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_wxcms_account
+-- ----------------------------
+INSERT INTO `t_wxcms_account` VALUES ('3', null, 'vp_weixinpy', 'wx4b2844432595ce08', '86923b5aa5f0f42b90d1e41d850752f2 ', 'http://www.jeeweixin.com/jeeweixin/wxapi/vp_weixinpy/message.html', '72597b9628704ab09e8b9e8cbe9b540a', '5', '2015-01-27 21:38:31');
+
+-- ----------------------------
 -- Table structure for `t_wxcms_account_fans`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_wxcms_account_fans`;
@@ -63,6 +68,7 @@ CREATE TABLE `t_wxcms_account_fans` (
   `createTime` datetime DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   `remark` varchar(50) DEFAULT NULL,
+  `wxid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -123,11 +129,14 @@ CREATE TABLE `t_wxcms_msg_base` (
   `favourCount` int(11) unsigned zerofill DEFAULT '00000000000',
   `createTime` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_wxcms_msg_base
 -- ----------------------------
+INSERT INTO `t_wxcms_msg_base` VALUES ('1', 'text', 'subscribe ', null, null, null, null, '2015-03-21 11:13:54');
+INSERT INTO `t_wxcms_msg_base` VALUES ('2', 'news', '1', null, null, null, null, '2015-03-21 11:19:48');
+INSERT INTO `t_wxcms_msg_base` VALUES ('3', 'news', '11', null, null, null, null, '2015-03-21 11:26:21');
 
 -- ----------------------------
 -- Table structure for `t_wxcms_msg_news`
@@ -145,11 +154,13 @@ CREATE TABLE `t_wxcms_msg_news` (
   `fromurl` varchar(255) DEFAULT NULL,
   `base_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_wxcms_msg_news
 -- ----------------------------
+INSERT INTO `t_wxcms_msg_news` VALUES ('1', '为什么是jeeweixin', 'jeeweixin', '', '', 'http://www.jeeweixin.com/res/upload/1426908565922.jpg', '1', 'http://www.weixinpy.com/wx/act/103/msgdetail/?mid=1367&mtype=news', '', '2');
+INSERT INTO `t_wxcms_msg_news` VALUES ('2', '微信开发教程', 'jeeweixin', '', '', 'http://www.jeeweixin.com/res/upload/1426908381642.jpg', null, '', 'http://weixinpy.com/vp/jiaocheng/index/', '3');
 
 -- ----------------------------
 -- Table structure for `t_wxcms_msg_text`
@@ -160,8 +171,9 @@ CREATE TABLE `t_wxcms_msg_text` (
   `content` longtext,
   `base_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_wxcms_msg_text
 -- ----------------------------
+INSERT INTO `t_wxcms_msg_text` VALUES ('1', '感谢您关注我们，更多消息请回复 1', '1');

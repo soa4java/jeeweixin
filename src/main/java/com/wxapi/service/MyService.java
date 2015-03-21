@@ -7,10 +7,13 @@ import com.wxcms.domain.Account;
 import com.wxcms.domain.AccountFans;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 
 public interface MyService {
+	
+	//消息处理
+	public String processMsg(MsgRequest msgRequest,Account account);
 
 	//消息处理
 	public String processMsg(MsgRequest msgRequest,String appId, String appSecret);

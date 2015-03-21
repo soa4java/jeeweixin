@@ -3,7 +3,7 @@ package com.wxcms.domain;
 
 /**
  * 文本消息
- * @author 微信 qicong88
+ * 
  *
  */
 public class MsgText extends MsgBase{

@@ -2,7 +2,7 @@ package com.wxapi.vo;
 
 /**
  * 语音消息
- * @author 微信 qicong88
+ * 
  * 
  */
 public class Voice {

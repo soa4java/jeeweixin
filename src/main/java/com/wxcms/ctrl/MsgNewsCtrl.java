@@ -20,7 +20,7 @@ import com.wxcms.domain.MsgNews;
 import com.wxcms.service.MsgBaseService;
 import com.wxcms.service.MsgNewsService;
 /**
- * @author 微信 qicong88
+ * 
  */
 
 @Controller

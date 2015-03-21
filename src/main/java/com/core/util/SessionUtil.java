@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * session 工具类
- * @author 微信 qicong88
+ * 
  */
 public class SessionUtil {
 	private static String SESSION_USER_KEY = "_session_user_";

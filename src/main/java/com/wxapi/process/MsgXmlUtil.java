@@ -26,7 +26,7 @@ import com.wxapi.vo.MsgResponseVoice;
 
 /**
  * xml 消息处理工具类
- * @author 微信 qicong88
+ * 
  */
 
 @SuppressWarnings("unchecked")

@@ -1,7 +1,7 @@
 package com.wxapi.process;
 
 /**
- * @author 微信 qicong88
+ * 
  */
 public class HttpMethod {
 

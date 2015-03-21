@@ -1,9 +1,6 @@
 @RequestMapping(value = "/{username}/index")
 	public ModelAndView index(String id,@PathVariable String username){
 	
-http://localhost:58080/jeewx/core/brainqijiechulanjieqixianzhi.jhtm
-
-
 动态SQL
 <trim prefix="where" prefixOverrides="and|or">
 	        1=1 

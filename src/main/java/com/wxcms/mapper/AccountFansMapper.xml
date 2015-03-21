@@ -42,7 +42,7 @@
         VALUES
         <foreach  collection="list" item="item" index="index" separator="," >  
         	<![CDATA[
-            ( #{openId},#{subscribeStatus},#{subscribeTime},#{nickname},#{gender},#{language},#{country},#{province},#{city},#{headimgurl},#{remark},#{status},#{id},#{wxid},#{createtime} ) 
+            ( #{item.openId},#{item.subscribeStatus},#{item.subscribeTime},#{item.nickname},#{item.gender},#{item.language},#{item.country},#{item.province},#{item.city},#{item.headimgurl},#{item.remark},#{item.status},#{item.id},#{item.wxid},#{item.createtime} ) 
         	 ]]>
         </foreach> 
     </insert>

@@ -2,7 +2,7 @@ package com.wxapi.process;
 
 /**
  * 消息类型
- * @author 微信 qicong88
+ * 
  */
 
 public enum OAuthScope {

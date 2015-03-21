@@ -35,7 +35,7 @@ import com.wxcms.mapper.MsgBaseDao;
 import com.wxcms.mapper.MsgNewsDao;
 /**
  * 业务消息处理
- * @author 微信 qicong88
+ * 开发者根据自己的业务自行处理消息的接收与回复；
  */
 
 @Service
@@ -59,28 +59,58 @@ public class MyServiceImpl implements MyService{
 	@Autowired
 	private AccountDao accountDao;
 	
+	private Integer msgCount = 5;//模式回复图文消息条数为5条
 	
-	//处理消息
+	
+	/**
+	 * 处理消息
+	 * 开发者可以根据用户发送的消息和自己的业务，自行返回合适的消息；
+	 * @param msgRequest : 接收到的消息
+	 * @param Account ： 公众号对象
+	 */
+	public String processMsg(MsgRequest msgRequest,Account account){
+		String appId = account.getAppid();
+		String appSecret = account.getAppsecret();
+		if(account.getMsgcount() != null){
+			msgCount = account.getMsgcount();
+		}
+		return this.processMsg(msgRequest,appId,appSecret);
+	}
+	
+	
+	/**
+	 * 处理消息
+	 * 开发者可以根据用户发送的消息和自己的业务，自行返回合适的消息；
+	 * @param msgRequest : 接收到的消息
+	 * @param appId ： appId
+	 * @param appSecret : appSecret
+	 */
 	public String processMsg(MsgRequest msgRequest,String appId,String appSecret){
-		String msgtype = msgRequest.getMsgType();
-		String respXml = null;
-		if(msgtype.equals(MsgType.Text.toString())){//文本消息
+		String msgtype = msgRequest.getMsgType();//接收到的消息类型
+		String respXml = null;//返回的内容；
+		if(msgtype.equals(MsgType.Text.toString())){
+			/**
+			 * 文本消息，一般公众号接收到的都是此类型消息
+			 */
 			respXml = this.processTextMsg(msgRequest,appId,appSecret);
+		}else if(msgtype.equals(MsgType.Event.toString())){//事件消息
+			/**
+			 * 用户订阅公众账号、点击菜单按钮的时候，会触发事件消息
+			 */
+			respXml = this.processEventMsg(msgRequest);
+			
+		//其他消息类型，开发者自行处理
 		}else if(msgtype.equals(MsgType.Image.toString())){//图片消息
 			
 		}else if(msgtype.equals(MsgType.Location.toString())){//地理位置消息
 			
-		}else if(msgtype.equals(MsgType.Event.toString())){//事件消息
-			respXml = this.processEventMsg(msgRequest);
 		}
-		//为空，返回 subscribe 消息
+		
+		//如果没有对应的消息，默认返回订阅消息；
 		if(StringUtils.isEmpty(respXml)){
 			MsgText text = msgBaseDao.getMsgTextByInputCode(MsgType.SUBSCRIBE.toString());
 			if(text != null){
 				respXml = MsgXmlUtil.textToXml(WxServiceProcess.getMsgResponseText(msgRequest, text));
-			}else{//随机返回3条图文消息
-				List<MsgNews> msgNews = msgNewsDao.getRandomMsg(3);
-				return MsgXmlUtil.newsToXml(WxServiceProcess.getMsgResponseNews(msgRequest, msgNews));
 			}
 		}
 		return respXml;
@@ -91,12 +121,9 @@ public class MyServiceImpl implements MyService{
 		String content = msgRequest.getContent();
 		if(!StringUtils.isEmpty(content)){//文本消息
 			String tmpContent = content.trim();
-			List<MsgNews> msgNews = msgNewsDao.getRandomMsgByContent(tmpContent,3);//返回3条图文消息
+			List<MsgNews> msgNews = msgNewsDao.getRandomMsgByContent(tmpContent,this.msgCount);//返回图文消息条数 msgCount
 			if(!CollectionUtils.isEmpty(msgNews)){
 				return MsgXmlUtil.newsToXml(WxServiceProcess.getMsgResponseNews(msgRequest, msgNews));
-			}else{
-			    msgNews = msgNewsDao.getRandomMsg(3);//返回3条图文消息
-			    return MsgXmlUtil.newsToXml(WxServiceProcess.getMsgResponseNews(msgRequest, msgNews));
 			}
 		}
 		return null;
@@ -105,17 +132,25 @@ public class MyServiceImpl implements MyService{
 	//处理事件消息
 	private String processEventMsg(MsgRequest msgRequest){
 		String key = msgRequest.getEventKey();
-		
 		if(MsgType.SUBSCRIBE.toString().equals(msgRequest.getEvent())){//订阅消息
 			MsgText text = msgBaseDao.getMsgTextBySubscribe();
 			if(text != null){
 				return MsgXmlUtil.textToXml(WxServiceProcess.getMsgResponseText(msgRequest, text));
 			}
-		}else if(MsgType.UNSUBSCRIBE.toString().equals(msgRequest.getEvent())){//取消订阅
-			
-		}else{//CLICK
+		}else if(MsgType.UNSUBSCRIBE.toString().equals(msgRequest.getEvent())){//取消订阅消息
+			MsgText text = msgBaseDao.getMsgTextByInputCode(MsgType.UNSUBSCRIBE.toString());
+			if(text != null){
+				return MsgXmlUtil.textToXml(WxServiceProcess.getMsgResponseText(msgRequest, text));
+			}
+		}else{//点击事件消息
 			if(!StringUtils.isEmpty(key)){
-				if(key.startsWith("_fix_")){//固定消息
+				/**
+				 * 固定消息
+				 * _fix_ ：在我们创建菜单的时候，做了限制，对应的event_key 加了 _fix_
+				 * 
+				 * 当然开发者也可以进行修改
+				 */
+				if(key.startsWith("_fix_")){
 					String baseIds = key.substring("_fix_".length());
 					if(!StringUtils.isEmpty(baseIds)){
 						String[] idArr = baseIds.split(",");
@@ -145,6 +180,9 @@ public class MyServiceImpl implements MyService{
 		return null;
 	}
 	
+	
+	
+	
 	//发布菜单
 	public JSONObject publishMenu(String gid,String appId, String appSecret){
 		List<AccountMenu> menus = menuDao.listWxMenus(gid);
@@ -167,7 +205,7 @@ public class MyServiceImpl implements MyService{
 
 	//获取用户列表
 	public boolean syncAccountFansList(String appId,String appSecret){
-		String nextOpenId = "";
+		String nextOpenId = null;
 		AccountFans lastFans = fansDao.getLastOpenId();
 		if(lastFans != null){
 			nextOpenId = lastFans.getOpenId();
@@ -175,25 +213,23 @@ public class MyServiceImpl implements MyService{
 		return doSyncAccountFansList(nextOpenId,appId,appSecret);
 	}
 	
-	//同步粉丝列表
+	//同步粉丝列表(最好做成定时任务)
 	private boolean doSyncAccountFansList(String nextOpenId, String appId, String appSecret){
-		if(!StringUtils.isEmpty(nextOpenId)){
-			String url = WxApi.getFansListUrl(WxApi.getToken(appId,appSecret).getAccessToken(), nextOpenId);
-			JSONObject jsonObject = WxApi.httpsRequest(url, HttpMethod.POST, null);
-			if(!StringUtils.isEmpty(jsonObject.getString("errcode"))){
-				return false;
-			}
-			List<AccountFans> fansList = new ArrayList<AccountFans>();
-			JSONArray openidArr = jsonObject.getJSONObject("data").getJSONArray("openid");
-			for(Object openId : openidArr){
-				AccountFans fans = WxServiceProcess.syncAccountFans(openId.toString(), appId, appSecret);
-				fansList.add(fans);
-			}
-			//批处理
-			fansDao.addList(fansList);
-			nextOpenId = jsonObject.getString("next_openid");
-			doSyncAccountFansList(nextOpenId,appId,appSecret);
+		String url = WxApi.getFansListUrl(WxApi.getToken(appId,appSecret).getAccessToken(), nextOpenId);
+		JSONObject jsonObject = WxApi.httpsRequest(url, HttpMethod.POST, null);
+		if(jsonObject.containsKey("errcode")){
+			return false;
 		}
+		List<AccountFans> fansList = new ArrayList<AccountFans>();
+		JSONArray openidArr = jsonObject.getJSONObject("data").getJSONArray("openid");
+		for(int i = 0; i < 5 ;i++){//同步5个
+			Object openId = openidArr.get(i);
+			AccountFans fans = WxServiceProcess.syncAccountFans(openId.toString(), appId, appSecret);
+			fansList.add(fans);
+		}
+		//批处理
+		fansDao.addList(fansList);
+//		nextOpenId = jsonObject.getString("next_openid");
 		return true;
 	}
 	

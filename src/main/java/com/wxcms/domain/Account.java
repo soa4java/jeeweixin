@@ -4,7 +4,7 @@ import com.core.domain.BaseEntity;
 
 /**
  * 微信公众账号
- * @author 微信 qicong88
+ * 
  *
  */
 public class Account extends BaseEntity{
@@ -15,7 +15,7 @@ public class Account extends BaseEntity{
 	private String appsecret;//appsecret
 	private String url;//验证时用的url
 	private String token;//token
-	private Integer msgcount;//自动回复消息条数
+	private Integer msgcount;//自动回复消息条数;默认是5条
 	
 	
 	public String getName() {
